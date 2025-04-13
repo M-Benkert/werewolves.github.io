@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   imports: [RouterOutlet],
   template: `<h1>{{ title }}</h1><router-outlet />`,
-  styles: [],
+  styles: `:host { width: 100%; }`,
 })
 export class AppComponent {
-  title = 'werewolves.github.io';
+  title = "Werwolf";
 }
