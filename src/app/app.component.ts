@@ -4,8 +4,8 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: `<h1>{{ title }}</h1><router-outlet />`,
+  styles: [],
 })
 export class AppComponent {
   title = 'werewolves.github.io';
