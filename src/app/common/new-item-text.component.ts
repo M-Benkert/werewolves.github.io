@@ -12,12 +12,13 @@ import {FormsModule} from "@angular/forms";
   `,
   styles: ``
 })
-export class TextFieldComponent {
+export class NewItemTextComponent {
   value: string = "";
 
   @Output() addEvent = new EventEmitter<string>();
 
   add() {
     this.addEvent.emit(this.value);
+    this.value = "";
   }
 }

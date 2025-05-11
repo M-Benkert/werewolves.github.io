@@ -6,7 +6,9 @@ import { RouterLink } from "@angular/router";
   selector: "app-home",
   imports: [RouterLink],
   template: `
-    <a routerLink="/players">Players</a>
+    <a routerLink="/new_game/players">Players</a>
+    <a routerLink="/new_game/characters">Characters</a>
+    <a routerLink="/new_game/characters/card">Character Card</a>
   `,
   styles: ``
 })

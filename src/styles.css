@@ -22,8 +22,10 @@ body {
 
 .text-input,
 .select-input {
+  width: calc(100% - 20px);
   flex: 1;
   padding: 10px;
+  margin-bottom: 12px;
   border-radius: 8px;
   border: none;
   background: #2c2c2c;
@@ -106,7 +108,7 @@ button {
 }
 
 
-/* Character Selection ----------------------------------------------------- */
+/* Base Selection ----------------------------------------------------- */
 #character-list {
   display: flex;
   flex-direction: column;
