@@ -11,7 +11,7 @@ export class PlayerService {
 
   addPlayer(name: string): void {
     if (!this.canAddPlayer(name)) {
-      throw new Error(`Spieler '${name}' existiert bereits!`);
+      throw new Error(`Can't add player '${name}': Name must be unique.`);
     }
 
     this.players.push(new Player(name));

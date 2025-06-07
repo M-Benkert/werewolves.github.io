@@ -11,15 +11,13 @@ import {createCharacter} from "./base/characters/utils";
 })
 export class CharacterService {
   characters: Character[] = [];
-  newCharacterType: CharacterType = CharacterType.BASE;
-
-  selectCharacterType(type: CharacterType): void {
-    this.newCharacterType = type;
-  }
 
   addCharacter(name: string, type: CharacterType): void {
     if (!this.canAddCharacter(name, type)) {
-      throw new Error("Die Namen der Charaktere müssen eindeutig sein!");
+      throw new Error(
+        `Can't add character '${name}' of type '${CharacterType[type]}':`
+        + ` Name must be unique or type must allow duplicates.`
+      );
     }
 
     this.characters.push(createCharacter(name, type));

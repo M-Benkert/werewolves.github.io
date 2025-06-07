@@ -40,19 +40,25 @@ export class PlayersComponent {
   }
 
   add(): void {
+    const name: string = this.newPlayerName.trim();
+
+    if (name === "") {
+      alert("Bitte gib einen Namen ein!");
+      return ;
+    }
+
+    if (!this.playersService.canAddPlayer(name)) {
+      alert(`Spieler '${name}' existiert bereits!`);
+      return ;
+    }
+
     this.addPlayer(this.newPlayerName);
     this.newPlayerName = "";
   }
 
   addPlayer(name: string): void {
-    try {
-      this.playersService.addPlayer(name.trim());
-      this.updatePlayerList();
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        alert(error.message);
-      }
-    }
+    this.playersService.addPlayer(name);
+    this.updatePlayerList();
   }
 
   removePlayer(id: string) {
