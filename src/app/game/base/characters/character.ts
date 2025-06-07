@@ -1,12 +1,18 @@
 import {CharacterType} from "./type";
 import {getRandomValue} from "../utils/random";
 
+export interface CharacterData {
+  id: string;
+  name: string;
+  type: CharacterType;
+}
+
 export class Character {
   private readonly id: string;
   private readonly name: string;
 
-  constructor(name: string) {
-    this.id = `c${getRandomValue()}`;
+  constructor(name: string, id?: string) {
+    this.id = id ?? `c${getRandomValue()}`;
     this.name = name;
   }
 
@@ -20,5 +26,13 @@ export class Character {
 
   getType(): CharacterType {
     return CharacterType.BASE;
+  }
+
+  toJSON(): CharacterData {
+    return {
+      id: this.id,
+      name: this.name,
+      type: this.getType()
+    };
   }
 }
