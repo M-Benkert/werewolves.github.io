@@ -63,8 +63,9 @@ button {
   color: white;
 }
 
-.action-next:hover {
-  background: #005ecb;
+.action-item {
+  background: #f5f5f5;
+  color: #121212;
 }
 
 

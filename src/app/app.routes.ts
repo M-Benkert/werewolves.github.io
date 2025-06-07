@@ -7,6 +7,7 @@ import { PlayersComponent } from "./new_game/01_players/players.component";
 import { CharactersComponent } from "./new_game/02_characters/characters.component";
 import { NewCharacterSelectComponent } from "./new_game/02_characters/new-character-select.component";
 import { NewCharacterConfigureComponent } from "./new_game/02_characters/new-character-configure.component";
+import { AssignComponent } from "./new_game/03_assign/assign.component";
 
 export const routes: Routes = [
   {
@@ -39,4 +40,9 @@ export const routes: Routes = [
     title: "Charakter Anpassen",
     component: NewCharacterConfigureComponent,
   },
+  {
+    path: "new_game/assign",
+    title: "Zuordnung",
+    component: AssignComponent,
+  }
 ];
