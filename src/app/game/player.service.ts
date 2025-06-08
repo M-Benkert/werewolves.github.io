@@ -14,6 +14,7 @@ export class PlayerService {
     this.load();
   }
 
+  /* Storage *************************************************************** */
   private storageKey = "new-game-players";
 
   private save(): void {

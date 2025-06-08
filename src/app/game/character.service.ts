@@ -17,6 +17,7 @@ export class CharacterService {
     this.load()
   }
 
+  /* Storage *************************************************************** */
   private storageKey = "new-game-characters";
 
   private save(): void {
