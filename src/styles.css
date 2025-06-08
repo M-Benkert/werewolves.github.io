@@ -22,7 +22,6 @@ body {
 
 .text-input,
 .select-input {
-  width: calc(100% - 20px);
   flex: 1;
   padding: 10px;
   margin-bottom: 12px;
@@ -30,6 +29,14 @@ body {
   border: none;
   background: #2c2c2c;
   color: white;
+}
+
+.text-input {
+  width: calc(100% - 20px);
+}
+
+.select-input {
+  width: 100%;
 }
 
 button {
@@ -62,6 +69,11 @@ button {
   background: #007aff;
   color: white;
 }
+
+.action-back {
+   background: #d0e7ff;
+   color: #007aff;
+ }
 
 .action-item {
   background: #f5f5f5;

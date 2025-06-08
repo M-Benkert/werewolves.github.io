@@ -9,7 +9,8 @@ import { Player } from "./base/players/player";
 })
 export class AssignmentIteratorService {
   /* Properties ************************************************************ */
-  private playerIterator: IterableIterator<Player> | null = null;
+  private iterate: boolean = true;
+  private iteratorIndex: number = -1;
   private currentPlayer: Player | null = null;
 
   /* Constructor *********************************************************** */
@@ -17,19 +18,43 @@ export class AssignmentIteratorService {
 
   /* New Game ************************************************************** */
   newAssignmentCharacterToPlayer(): void {
-    this.playerIterator = this.assignmentService.getPlayerIterator();
+    this.iterate = true;
+    this.iteratorIndex = -1;
   }
 
-  /* Next Player *********************************************************** */
-  nextPlayer(): void {
-    if (this.playerIterator) {
-      const next = this.playerIterator.next();
-      if (!next.done) {
-        this.currentPlayer = next.value;
-      } else {
-        this.currentPlayer = null;
-      }
+  /* Iteration ************************************************************* */
+  hasNext(): boolean {
+    if (!this.iterate) {
+      return false;
     }
+    const players = this.getPlayers();
+    return this.iteratorIndex + 1 < players.length;
+  }
+
+  hasPrevious(): boolean {
+    return this.iteratorIndex > 0;
+  }
+
+  next(): Player | null {
+    if (this.hasNext()) {
+      this.iteratorIndex++;
+      this.currentPlayer = this.getPlayers()[this.iteratorIndex];
+      return this.currentPlayer;
+    }
+    return null;
+  }
+
+  previous(): Player | null {
+    if (this.hasPrevious()) {
+      this.iteratorIndex--;
+      this.currentPlayer = this.getPlayers()[this.iteratorIndex];
+      return this.currentPlayer;
+    }
+    return null;
+  }
+
+  getPlayers(): Player[] {
+    return this.assignmentService.getPlayers();
   }
 
   /* Get Current Player **************************************************** */

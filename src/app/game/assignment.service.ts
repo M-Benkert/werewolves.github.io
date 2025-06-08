@@ -36,13 +36,13 @@ export class AssignmentService {
       this.players.set(player.getId(), player);
     });
 
-    // this.save();
+    this.save();
   }
 
   /* Storage *************************************************************** */
   private storageKey = "assignments";
 
-  private save(): void {
+  save(): void {
     localStorage.setItem(
       this.storageKey,
       JSON.stringify({

@@ -20,12 +20,19 @@ import { Player } from "../../game/base/players/player";
       [listItems]="assignedCharacters"
       (removeEvent)="unassign($event)"
     ></app-list>
-    <select class="select-input" [(ngModel)]="selectedCharacterID">
+    <select
+      id="select-input"
+      class="select-input"
+      [(ngModel)]="selectedCharacterID"
+      (ngModelChange)="assign()"
+    >
       <option *ngFor="let character of unassignedCharacters" [value]="character.getId()">
         {{ character.getName() }}
       </option>
     </select>
-    <button class="game-button action-add" (click)="assign()">Zuordnen</button>
+    <button class="game-button action-back" (click)="previous()">
+      Zurück
+    </button>
     <button class="game-button action-next" (click)="next()">
       Weiter
     </button>
@@ -36,6 +43,9 @@ export class AssignCharacterToPlayerComponent {
   currentPlayer: Player | null = null;
   assignedCharacters: Character[] = [];
   unassignedCharacters: Character[] = [];
+
+  hasNext: boolean = true;
+  hasPrevious: boolean = false;
 
   selectedCharacterID: string = "";
 
@@ -48,11 +58,19 @@ export class AssignCharacterToPlayerComponent {
   }
 
   next(): void {
-    this.assignmentIteratorService.nextPlayer();
-    this.currentPlayer = this.assignmentIteratorService.getCurrentPlayer();
+    this.currentPlayer = this.assignmentIteratorService.next();
 
     this.updateAssignedCharacters();
     this.updateUnassignedCharacters();
+    this.updateGameButtons();
+  }
+
+  previous(): void {
+    this.currentPlayer = this.assignmentIteratorService.previous();
+
+    this.updateAssignedCharacters();
+    this.updateUnassignedCharacters();
+    this.updateGameButtons();
   }
 
   /* Assign and Unassign *************************************************** */
@@ -77,6 +95,7 @@ export class AssignCharacterToPlayerComponent {
 
     const playerID = this.currentPlayer.getId();
     this.unassignCharacterFromPlayer(characterID, playerID);
+    this.selectedCharacterID = "";
   }
 
   assignCharacterToPlayer(characterID: string, playerID: string): void {
@@ -103,5 +122,10 @@ export class AssignCharacterToPlayerComponent {
 
   private updateUnassignedCharacters(): void {
     this.unassignedCharacters = this.assignmentService.getUnassignedCharacters();
+  }
+
+  private updateGameButtons(): void {
+    this.hasNext = this.assignmentIteratorService.hasNext();
+    this.hasPrevious = this.assignmentIteratorService.hasPrevious();
   }
 }
