@@ -1,20 +1,20 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 
-import { Character, CharacterData } from "./base/characters/character";
-import { characterMetadata } from "./base/characters/metadata";
-import { CharacterType } from "./base/characters/type";
-import { createCharacter } from "./base/characters/utils";
+import {Character, CharacterData} from "../base/characters/character";
+import {characterMetadata} from "../base/characters/metadata";
+import {CharacterType} from "../base/characters/type";
+import {createCharacter} from "../base/characters/utils";
 
 
 @Injectable({
   providedIn: "root"
 })
 export class CharacterService {
-  characters: Character[] = [];
+  private characters: Character[] = [];
 
   /* Constructor *********************************************************** */
   constructor() {
-    this.load()
+    this.load();
   }
 
   /* Storage *************************************************************** */
@@ -68,7 +68,7 @@ export class CharacterService {
     return this.characters.every(
       character => (
         character.getName() !== name
-        || ( character.getType() === type && !isUniqueType)
+        || (character.getType() === type && !isUniqueType)
       )
     );
   }

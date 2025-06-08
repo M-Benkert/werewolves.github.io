@@ -1,5 +1,5 @@
-import { Character } from "./character";
-import { CharacterType } from "./type";
+import {Character} from "./character";
+import {CharacterType} from "./type";
 
 export class Werewolf extends Character {
   constructor(name: string, id?: string) {

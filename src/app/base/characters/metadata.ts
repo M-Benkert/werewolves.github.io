@@ -1,4 +1,4 @@
-import { CharacterType } from "./type";
+import {CharacterType} from "./type";
 
 
 export interface CharacterMetadata {
@@ -30,7 +30,7 @@ export const characterMetadata = new Map<CharacterType, CharacterMetadata>([
       isUnique: false,
     },
   ],
-])
+]);
 
 export const FALLBACK_CHARACTER_METADATA: CharacterMetadata = {
   name: "Unknown",

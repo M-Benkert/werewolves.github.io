@@ -3,8 +3,8 @@ import { RouterLink } from "@angular/router";
 
 import { ListComponent } from "../../common/list.component";
 
-import { Character } from "../../game/base/characters/character";
-import { CharacterService } from "../../game/character.service";
+import { Character } from "../../base/characters/character";
+import { CharacterService } from "../../services/character.service";
 
 @Component({
   selector: "app-new_game-02_characters",

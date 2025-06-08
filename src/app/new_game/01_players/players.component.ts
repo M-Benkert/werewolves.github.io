@@ -5,8 +5,8 @@ import { RouterLink } from "@angular/router";
 
 import { ListComponent } from "../../common/list.component";
 
-import { Player } from "../../game/base/players/player";
-import { PlayerService } from "../../game/player.service";
+import { Player } from "../../base/players/player";
+import { PlayerService } from "../../services/player.service";
 
 @Component({
   selector: "app-new_game-01_players",

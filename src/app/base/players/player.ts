@@ -1,4 +1,4 @@
-import { getRandomValue} from "../utils/random";
+import {getRandomValue} from "../utils/random";
 
 export interface PlayerData {
   id: string;

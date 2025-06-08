@@ -3,7 +3,7 @@ import { RouterLink } from "@angular/router";
 
 import { CharacterCardComponent } from "./character-card.component";
 
-import { characterMetadata } from "../../game/base/characters/metadata";
+import { characterMetadata } from "../../base/characters/metadata";
 
 @Component({
   selector: "app-new_game-new_character_select",

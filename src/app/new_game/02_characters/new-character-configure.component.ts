@@ -2,14 +2,14 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
-import { CharacterType } from "../../game/base/characters/type";
+import { CharacterType } from "../../base/characters/type";
 import {
   CharacterMetadata,
   characterMetadata,
   FALLBACK_CHARACTER_METADATA,
-} from "../../game/base/characters/metadata";
+} from "../../base/characters/metadata";
 
-import { CharacterService } from "../../game/character.service";
+import { CharacterService } from "../../services/character.service";
 
 @Component({
   selector: "app-new-game-new-character-configure",

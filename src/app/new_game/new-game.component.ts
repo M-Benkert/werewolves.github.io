@@ -1,12 +1,14 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 
-import { Character } from "../game/base/characters/character";
-import { Player } from "../game/base/players/player";
+import { Character } from "../base/characters/character";
+import { Player } from "../base/players/player";
 
-import { AssignmentService } from "../game/assignment.service";
-import { CharacterService } from "../game/character.service";
-import { PlayerService} from "../game/player.service";
+import { AssignmentService } from "../services/assignment.service";
+import { CharacterService } from "../services/character.service";
+import { CharacterService2 } from "../services/character.service2";
+import { PlayerService} from "../services/player.service";
+import { PlayerService2 } from "../services/player.service2";
 
 @Component({
   selector: "app-new-game",
@@ -22,26 +24,33 @@ import { PlayerService} from "../game/player.service";
   `,
   styles: ``
 })
-export class NewGameComponent {
+export class NewGameComponent implements OnInit {
   characters: Character[] = [];
   players: Player[] = [];
 
   constructor(
     private router: Router,
-    private assignmentService: AssignmentService,
     private characterService: CharacterService,
     private playerService: PlayerService,
-  ) {
+    private characterService2: CharacterService2,
+    private playerService2: PlayerService2,
+    private assignmentService: AssignmentService,
+  ) {}
+
+  ngOnInit() {
     this.characters = this.characterService.getCharacters();
     this.players = this.playerService.getPlayers();
   }
 
   newGame() {
-    this.assignmentService.newGame(
+    this.characterService2.newGame(
       this.characterService.getCharacters(),
-      this.playerService.getPlayers()
     )
+    this.playerService2.newGame(
+      this.playerService.getPlayers(),
+      );
+    this.assignmentService.newGame();
 
-    this.router.navigate(["/new_game/assign"]);
+    this.router.navigate(["/assignment"]);
   }
 }

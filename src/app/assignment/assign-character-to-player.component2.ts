@@ -1,17 +1,18 @@
-import { Component } from "@angular/core";
-import { FormsModule } from "@angular/forms";
 import { NgForOf } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
-import { ListComponent } from "../../common/list.component";
+import { ListComponent } from "../common/list.component";
 
-import { AssignmentService } from "../../game/assignment.service";
-import { AssignmentIteratorService } from "../../game/assignment-iterator.service";
+import { AssignmentService } from "../services/assignment.service"
+import { PlayerIteratorService } from "../services/player-iterator.service";
 
-import { Character } from "../../game/base/characters/character";
-import { Player } from "../../game/base/players/player";
+import { Character } from "../base/characters/character";
+import { Player } from "../base/players/player";
 
 @Component({
-  selector: "app-assign-character-to-player",
+  selector: "app-assign-character-to-player2",
   imports: [FormsModule, ListComponent, NgForOf],
   template: `
     <h2>Charaktere Zuordnen</h2>
@@ -39,7 +40,7 @@ import { Player } from "../../game/base/players/player";
   `,
   styles: ``
 })
-export class AssignCharacterToPlayerComponent {
+export class AssignCharacterToPlayerComponent2 implements OnInit {
   currentPlayer: Player | null = null;
   assignedCharacters: Character[] = [];
   unassignedCharacters: Character[] = [];
@@ -51,26 +52,55 @@ export class AssignCharacterToPlayerComponent {
 
   /* Constructor *********************************************************** */
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private assignmentService: AssignmentService,
-    private assignmentIteratorService: AssignmentIteratorService
-  ) {
-    this.next();
+    private playerIteratorService: PlayerIteratorService,
+  ) { }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const playerID = params["playerID"];
+      if (playerID) {
+        this.playerIteratorService.goToPlayer(playerID);
+      } else {
+        this.playerIteratorService.newIteration();
+      }
+
+      this.currentPlayer = this.playerIteratorService.current();
+      this.updateAssignedCharacters();
+      this.updateUnassignedCharacters();
+      this.updateGameButtons();
+    });
   }
 
+  /* Game Buttons ********************************************************** */
   next(): void {
-    this.currentPlayer = this.assignmentIteratorService.next();
+    const nextPlayer = this.playerIteratorService.next();
 
-    this.updateAssignedCharacters();
-    this.updateUnassignedCharacters();
-    this.updateGameButtons();
+    if (nextPlayer) {
+      this.router.navigate([
+        "/assignment",
+        "character-to-player",
+        nextPlayer.getId(),
+      ]);
+    } else {
+      this.router.navigate(["/main"]);
+    }
   }
 
   previous(): void {
-    this.currentPlayer = this.assignmentIteratorService.previous();
+    const previousPlayer = this.playerIteratorService.previous();
 
-    this.updateAssignedCharacters();
-    this.updateUnassignedCharacters();
-    this.updateGameButtons();
+    if (previousPlayer) {
+      this.router.navigate([
+        "/assignment",
+        "character-to-player",
+        previousPlayer.getId(),
+      ]);
+    } else {
+      this.router.navigate(["/assignment"]);
+    }
   }
 
   /* Assign and Unassign *************************************************** */
@@ -125,7 +155,7 @@ export class AssignCharacterToPlayerComponent {
   }
 
   private updateGameButtons(): void {
-    this.hasNext = this.assignmentIteratorService.hasNext();
-    this.hasPrevious = this.assignmentIteratorService.hasPrevious();
+    this.hasNext = this.playerIteratorService.hasNext();
+    this.hasPrevious = this.playerIteratorService.hasPrevious();
   }
 }

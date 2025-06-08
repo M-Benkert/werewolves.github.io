@@ -1,0 +1,1 @@
+ng build --base-href=/werewolves.github.io/

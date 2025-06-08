@@ -4,8 +4,8 @@ import {
   CharacterMetadata,
   characterMetadata,
   FALLBACK_CHARACTER_METADATA,
-} from "../../game/base/characters/metadata";
-import { CharacterType } from "../../game/base/characters/type";
+} from "../../base/characters/metadata";
+import { CharacterType } from "../../base/characters/type";
 
 @Component({
   selector: "app-new-game-character-card",

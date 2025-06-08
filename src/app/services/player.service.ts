@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 
-import { Player, PlayerData } from "./base/players/player";
+import {Player, PlayerData} from "../base/players/player";
 
 
 @Injectable({
   providedIn: "root"
 })
 export class PlayerService {
-  players: Player[] = [];
+  private players: Player[] = [];
 
   /* Constructor *********************************************************** */
   constructor() {
@@ -23,7 +23,7 @@ export class PlayerService {
       JSON.stringify(
         this.players.map(player => player.toJSON())
       ),
-    )
+    );
   }
 
   private load(): void {

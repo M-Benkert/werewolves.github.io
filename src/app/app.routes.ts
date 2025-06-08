@@ -7,8 +7,9 @@ import { PlayersComponent } from "./new_game/01_players/players.component";
 import { CharactersComponent } from "./new_game/02_characters/characters.component";
 import { NewCharacterSelectComponent } from "./new_game/02_characters/new-character-select.component";
 import { NewCharacterConfigureComponent } from "./new_game/02_characters/new-character-configure.component";
-import { AskAssignComponent } from "./main/00_assign/ask-assign.component";
-import { AssignCharacterToPlayerComponent } from "./main/00_assign/assign-character-to-player.component";
+import { AskAssignComponent } from "./assignment/ask-assign.component";
+import { AssignCharacterToPlayerComponent } from "./assignment/assign-character-to-player.component";
+import { AssignCharacterToPlayerComponent2 } from "./assignment/assign-character-to-player.component2";
 
 export const routes: Routes = [
   {
@@ -42,13 +43,18 @@ export const routes: Routes = [
     component: NewCharacterConfigureComponent,
   },
   {
-    path: "main/assign",
+    path: "assignment",
     title: "Zuordnung",
     component: AskAssignComponent,
   },
   {
-    path: "main/assign-character-to-player",
+    path: "assignment/character-to-player",
     title: "Charaktere zuordnen",
     component: AssignCharacterToPlayerComponent,
+  },
+  {
+    path: "assignment/character-to-player/:playerID",
+    title: "Charaktere zuordnen",
+    component: AssignCharacterToPlayerComponent2,
   }
 ];
